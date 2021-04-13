@@ -29,7 +29,9 @@
 | prefecture_id            | integer    | null: false                    |
 | scheduled_delivery_id    | integer    | null: false                    |
 | price                    | integer    | null: false                    |
-| user_id                  | integer    |null: false
+| user_id                  | integer    | null: false                    |
+| destination_id           | integer    | null: false                    |
+| order_id                 | integer    | null: false                    | 
 
 ### Association
 
@@ -41,12 +43,13 @@
 
 | Column                   | Type       | Options                        |
 | ------                   | ---------- | ------------------------------ |
-| postal_code              | integer    | null: false                    |
-| prefecture               | string     | null: false                    |
-| city                     | string     | null: false                    |
-| addresses                | string     | null: false                    |
-| building                 | string     |                                |
-| phone_number             | string     | null: false                    |
+| postal_code_id           | integer    | null: false                    |
+| prefecture_id            | integer    | null: false                    |
+| city_id                  | integer    | null: false                    |
+| addresses_id             | integer    | null: false                    |
+| building_id              | integer    |                                |
+| phone_number_id          | integer    | null: false                    |
+| produdt_id               | integer    | null: false                    |
 
 ### Association
 
@@ -60,5 +63,5 @@
 | user_id                  | string     | null: false                    |
 | product_id               | string     | null: false                    |
 
-- has_one :product
+- belongs to :product
 - belongs_to :user
