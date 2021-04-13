@@ -6,7 +6,6 @@
 | ------                | ---------- | ------------------------------ |
 | nickname               | string     | null: false                    |
 | email                 | string     | unique: true                    |
-| password              | string     | null: false                    |
 | encrypted_password    | string     | null: false                    |
 | last_name             | string     | null: false                    |
 | first_name            | string     | null: false                    |
@@ -17,7 +16,7 @@
 ### Association
 
 - has_many :product
-- belongs_to :order
+- has_many :orders
 
 ## product テーブル
 | Column                   | Type       | Options                        |
@@ -35,8 +34,7 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :orser
-- belongs_to :card
+- belongs_to :order
 - belongs_to :destination
 
 ## destination テーブル
@@ -54,24 +52,13 @@
 
 - has_one :product
 
-## card テーブル
-| Column                   | Type       | Options                        |
-| ------                   | ---------- | ------------------------------ |
-| number              | integer    | null: false                    |
-| exp-month           | integer    | null: false                    |
-| exp-year            | integer    | null: false                    |
-| cvc                 | integer    | null: false                    |
-
-### Association
-
-- has_one :product
 
 ## orders テーブル
 
 | Column                   | Type       | Options                        |
 | ------                   | ---------- | ------------------------------ |
-| user                     | string     | null: false                    |
+| user_id                  | string     | null: false                    |
 | product_id               | string     | null: false                    |
 
 - has_one :product
-- has_one :user
+- belongs_to :user
