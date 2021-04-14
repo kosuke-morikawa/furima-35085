@@ -4,8 +4,8 @@
 
 | Column                | Type       | Options                        |
 | ------                | ---------- | ------------------------------ |
-| nickname               | string     | null: false                    |
-| email                 | string     | unique: true                    |
+| nickname              | string     | null: false                    |
+| email                 | string     | unique: true,null: false       |
 | encrypted_password    | string     | null: false                    |
 | last_name             | string     | null: false                    |
 | first_name            | string     | null: false                    |
@@ -34,7 +34,7 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :order
+- has_one :order
 
 ## destination テーブル
 
@@ -51,7 +51,7 @@
 
 ### Association
 
-has_one :order
+belongs_to :order
 
 
 ## orders テーブル
