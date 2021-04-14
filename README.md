@@ -15,13 +15,13 @@
 
 ### Association
 
-- has_many :product
+- has_many :products
 - has_many :orders
 
 ## product テーブル
 | Column                   | Type       | Options                        |
 | ------                   | ---------- | ------------------------------ |
-| name                     | integer    | null: false                    |
+| name                     | string     | null: false                    |
 | info                     | text       | null: false                    |
 | category_id              | integer    | null: false                    |
 | sales_status_id          | integer    | null: false                    |
@@ -29,39 +29,39 @@
 | prefecture_id            | integer    | null: false                    |
 | scheduled_delivery_id    | integer    | null: false                    |
 | price                    | integer    | null: false                    |
-| user_id                  | integer    | null: false                    |
-| destination_id           | integer    | null: false                    |
-| order_id                 | integer    | null: false                    | 
+| user                     | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :order
-- belongs_to :destination
 
 ## destination テーブル
 
 | Column                   | Type       | Options                        |
 | ------                   | ---------- | ------------------------------ |
-| postal_code_id           | integer    | null: false                    |
+| postal_code              | string     | null: false                    |
 | prefecture_id            | integer    | null: false                    |
-| city_id                  | integer    | null: false                    |
-| addresses_id             | integer    | null: false                    |
-| building_id              | integer    |                                |
-| phone_number_id          | integer    | null: false                    |
-| produdt_id               | integer    | null: false                    |
+| city                     | string     | null: false                    |
+| addresses                | string     | null: false                    |
+| building                 | string     |                                |
+| phone_number             | string     | null: false                    |
+| product                  | references | null: false, foreign_key: true |
+| order                    | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :product
+has_one :order
 
 
 ## orders テーブル
 
 | Column                   | Type       | Options                        |
 | ------                   | ---------- | ------------------------------ |
-| user_id                  | string     | null: false                    |
-| product_id               | string     | null: false                    |
+| user                     | references | null: false, foreign_key: true |
+| product                  | references | null: false, foreign_key: true |
+| destination              | references | null: false, foreign_key: true |
 
 - belongs to :product
 - belongs_to :user
+- belongs_to :destination
