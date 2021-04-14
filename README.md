@@ -46,7 +46,6 @@
 | addresses                | string     | null: false                    |
 | building                 | string     |                                |
 | phone_number             | string     | null: false                    |
-| product                  | references | null: false, foreign_key: true |
 | order                    | references | null: false, foreign_key: true |
 
 ### Association
@@ -60,8 +59,8 @@ belongs_to :order
 | ------                   | ---------- | ------------------------------ |
 | user                     | references | null: false, foreign_key: true |
 | product                  | references | null: false, foreign_key: true |
-| destination              | references | null: false, foreign_key: true |
+
 
 - belongs to :product
 - belongs_to :user
-- belongs_to :destination
+- has_one :destination
