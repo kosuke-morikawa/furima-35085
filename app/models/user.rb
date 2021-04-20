@@ -11,8 +11,8 @@ class User < ApplicationRecord
   with_options presence: true do
     # 英数字混合にする
     validates :password,format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "is invalid. Inputhalf-width sharacters."}
-    # 全角（漢字・ひらがな・カタカナ）での入力にする
-    validates :nickname, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
+   
+    validates :nickname
     # ユーザーのフリガナは全角のカタカナにする。（苗字）
     validates :first_name_kana, format: {with: /\A[ァ-ヶー]+\z/}
     # ユーザーのフリガナは全角のカタカナにする。（姓名）
