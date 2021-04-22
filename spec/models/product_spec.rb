@@ -26,7 +26,7 @@ RSpec.describe Product, type: :model do
     end
 
     it '商品の説明が必須であること' do
-      @product.descuription = ''
+      @product.info = ''
       @product.valid?
       expect(@product.errors.full_messages).to include "Info can't be blank"
     end
@@ -34,31 +34,31 @@ RSpec.describe Product, type: :model do
     it 'カテゴリーが必須であること' do
       @product.category_id = ''
       @product.valid?
-      expect(@product.errors.full_messages).to include "Category can't be blank"
+      expect(@product.errors.full_messages).to include "Category is not a number"
     end
 
     it '商品の状態が必須であること' do
-      @product.condition_id = ''
+      @product.sales_status_id = ''
       @product.valid?
-      expect(@product.errors.full_messages).to include "Sales status can't be blank"
+      expect(@product.errors.full_messages).to include "Sales status is not a number"
     end
 
     it '配送料の負担が必須であること' do
-      @product.postagetype_id = ''
+      @product.shipping_fee_status_id = ''
       @product.valid?
-      expect(@product.errors.full_messages).to include "Shipping fee status can't be blank"
+      expect(@product.errors.full_messages).to include "Shipping fee status is not a number"
     end
 
     it '発送元の地域が必須であること' do
-      @product.placeshipment_id = ''
+      @product.prefecture_id = ''
       @product.valid?
-      expect(@product.errors.full_messages).to include "Prefecture can't be blank"
+      expect(@product.errors.full_messages).to include "Prefecture is not a number"
     end
 
     it '発送までの日数が必須であること' do
-      @product.preparationday_id = ''
+      @product.scheduled_delivery_id = ''
       @product.valid?
-      expect(@product.errors.full_messages).to include "Scheduled delivery can't be blank"
+      expect(@product.errors.full_messages).to include "Scheduled delivery is not a number"
     end
 
     it '販売価格が必須であること' do
@@ -104,25 +104,25 @@ RSpec.describe Product, type: :model do
     end
 
     it "商品の状態で{ id: 1, name: '--' }が選択された時に登録できないこと" do
-      @product.condition_id = '1'
+      @product.sales_status_id = '1'
       @product.valid?
       expect(@product.errors.full_messages).to include 'Sales status must be other than 1'
     end
 
     it "配送料の負担で{ id: 1, name: '--' }が選択された時に登録できないこと" do
-      @product.postagetype_id = '1'
+      @product.shipping_fee_status_id = '1'
       @product.valid?
       expect(@product.errors.full_messages).to include 'Shipping fee status must be other than 1'
     end
 
     it "発送元の地域で{ id: 1, name: '--' }が選択された時に登録できないこと" do
-      @product.placeshipment_id = '1'
+      @product.prefecture_id = '1'
       @product.valid?
       expect(@product.errors.full_messages).to include 'Prefecture must be other than 1'
     end
 
     it "発送までの日数で{ id: 1, name: '--' }が選択された時に登録できないこと" do
-      @product.preparationday_id = '1'
+      @product.scheduled_delivery_id = '1'
       @product.valid?
       expect(@product.errors.full_messages).to include 'Scheduled delivery must be other than 1'
     end

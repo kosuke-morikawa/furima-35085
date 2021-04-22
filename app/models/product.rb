@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   belongs_to :scheduled_delivery
 
   belongs_to :user
-  has_one :order
+  # has_one :order
   has_one_attached :image
 
   with_options presence: true do
@@ -19,12 +19,12 @@ class Product < ApplicationRecord
     validates :image
   end
 
-  with_options presence: true, numericality: { other_than: 1 } do
-    validates :category_id, numericality: { other_than: 1 }
-    validates :sales_status_id, numericality: { other_than: 1 }
-    validates :shipping_fee_status_id, numericality: { other_than: 1 }
-    validates :prefecture_id, numericality: { other_than: 1 }
-    validates :scheduled_delivery_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :sales_status_id
+    validates :shipping_fee_status_id
+    validates :prefecture_id
+    validates :scheduled_delivery_id
   end
 end
 
