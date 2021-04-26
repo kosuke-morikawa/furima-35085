@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = OrderDestination.new(order_destination_params)
+    
     if @order.valid?
       pay_product
       @order.save
@@ -25,10 +26,10 @@ class OrdersController < ApplicationController
   end
   
   def pay_product
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp.api_key = "sk_test_78e99efcd982c9e45a72ec4e"
     Payjp::Charge.create(
       amount: @product.price,
-      card: order_params[:token],
+      card: order_destination_params[:token],
       currency: 'jpy'
     )
   end
