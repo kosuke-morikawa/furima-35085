@@ -75,10 +75,16 @@ RSpec.describe OrderDestination, type: :model do
       expect(@order_destination.errors.full_messages).to include 'Postal code is invalid'
     end
 
-    it '電話番号が11桁以内の数値のみであること' do
-      @order_destination.phone_number = '000000000000'
+    it '電話番号が12桁以上の数値では登録できないこと' do
+      @order_destination.phone_number = '00000000000000000'
       @order_destination.valid?
       expect(@order_destination.errors.full_messages).to include 'Phone number is invalid'
+    end
+    
+    it '電話番号が9桁以下の数値では登録できないこと' do
+      @order_destination.phone_number = '12345678'
+      @order_destination.valid?
+      expect(@order_destination.errors.full_messages).to include('Phone number is invalid')
     end
 
     it '電話番号は英数混合では登録できないこと' do
