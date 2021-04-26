@@ -1,13 +1,18 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :product_find, only: [:index, :create]
+  before_action :user_check, only: [:index, :create]
+
   def index
-    @order = Order.new
+    @order = OrderDestination.new
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = OrderDestination.new(order_destination_params)
     if @order.valid?
+      pay_product
       @order.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index'
     end
@@ -15,8 +20,25 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    params.require(:order).permit()
+  def order_destination_params
+    params.require(:order_destination).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
   end
   
+  def pay_product
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @product.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
+  end
+
+  def product_find
+    @product = Product.find(params[:product_id])
+  end
+
+  def user_check
+    redirect_to root_path if current_user == @product.user || @product.order.present?
+  end
+
 end
