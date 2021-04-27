@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:image, :name, :info,:category_id,:sales_status_id,:shipping_fee_status_id,:prefecture_id,:scheduled_delivery_id, :price).merge(user_id: current_user.id)
+    params.require(:product).permit(:image, :name, :info,:category_id,:sales_status_id,:shipping_fee_status_id,:prefecture_id,:scheduled_delivery_id, :price, :user_id).merge(user_id: current_user.id)
   end
 
   def product_find
@@ -52,6 +52,6 @@ class ProductsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path if @product.user_id != current_user.id
+    redirect_to root_path if @product.user_id != current_user.id || @product.order.present?
   end
 end
